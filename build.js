@@ -16,8 +16,9 @@ Metalsmith(__dirname)
   .use(
     sass({
       outputStyle: 'compressed',
+      includePaths: ['node_modules'],
       sourceMap: true,
-      sourceMapContents: true
+      sourceMapContents: true,
     })
   )
   .use(

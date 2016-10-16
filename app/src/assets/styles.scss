@@ -1,11 +1,2 @@
-body {
-  color: red;
+@import 'concise.css/src/concise.scss';
 
-  &-colored {
-    color: green;
-  }
-
-  .other {
-    border: 1px solid gray;
-  }
-}

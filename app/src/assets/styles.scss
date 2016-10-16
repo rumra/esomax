@@ -1,0 +1,11 @@
+body {
+  color: red;
+
+  &-colored {
+    color: green;
+  }
+
+  .other {
+    border: 1px solid gray;
+  }
+}

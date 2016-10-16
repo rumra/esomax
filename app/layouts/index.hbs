@@ -1,5 +1,11 @@
-{{# extend "base" title=title}}
-  {{# content "content" }}
+{{# extend "base"}}
+
+  {{# content "title"}}
+    {{ title }}
+  {{/content}}
+
+  {{# content "mainContainer" }}
     {{{ contents }}}
   {{/content}}
+
 {{/extend}}

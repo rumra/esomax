@@ -1,6 +1,6 @@
 var Metalsmith = require('metalsmith');
 var layouts = require('metalsmith-layouts');
-var assets = require('metalsmith-assets');
+// var assets = require('metalsmith-assets');
 var handlebars = require('handlebars');
 var serve = require('metalsmith-serve');
 var watch = require('metalsmith-watch');

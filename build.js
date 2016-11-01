@@ -5,6 +5,8 @@ var handlebars = require('handlebars');
 var serve = require('metalsmith-serve');
 var watch = require('metalsmith-watch');
 var sass = require('metalsmith-sass');
+var permalinks = require('metalsmith-permalinks');
+var collections = require('metalsmith-collections');
 
 var handlebarsLayouts = require('handlebars-layouts');
 
@@ -28,6 +30,25 @@ Metalsmith(__dirname)
       partials: 'app/partials'
     })
   )
+  .use(
+    permalinks({
+      pattern: ':title'
+    })
+  )
+  .use(
+    collections({
+      posts: {
+        sortBy: 'date',
+        reverse: true,
+        refer: false
+      },
+      articles: {
+        sortBy: 'date',
+        reverse: true,
+        refer: false
+      }
+    })
+  )
   // .use(
   //   assets({
   //     source: './app/assets',
@@ -42,8 +63,8 @@ Metalsmith(__dirname)
     watch({
       paths: {
         '${source}/**/*': true,
-        'app/layouts/**/*': '**/*.hbs',
-        'app/partials/**/*': "**/*.hbs",
+        'app/layouts/**/*': '**/*',
+        'app/partials/**/*': '**/*',
       },
       livereload: true,
     })

@@ -1,3 +1,14 @@
-{{#each collections.articles}}
-  {{{ contents }}}
-{{/each}}
+{{# extend "base"}}
+
+  {{# content "mainContainer" }}
+
+    {{#each collections.articles}}
+      <article>
+        <div>{{ this.path }}</div>
+        <div>{{{ contents }}}</div>
+      </article>
+    {{/each}}
+
+  {{/content}}
+
+{{/extend}}

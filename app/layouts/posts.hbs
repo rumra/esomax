@@ -1,0 +1,13 @@
+{{# extend "base"}}
+
+  {{# content "mainContainer" }}
+
+    <p>collections.length: {{ collections.posts.length }}</p>
+
+    {{#each collections.posts}}
+      <section>((( {{{ contents }}} )))</section>
+    {{/each}}
+
+  {{/content}}
+
+{{/extend}}

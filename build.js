@@ -16,6 +16,20 @@ handlebarsLayouts.register(handlebars);
 Metalsmith(__dirname)
   .source('app/src')
   .use(
+    collections({
+      articles: {
+        sortBy: 'date',
+        reverse: true,
+        refer: false
+      },
+      posts: {
+        sortBy: 'date',
+        reverse: true,
+        refer: false
+      }
+    })
+  )
+  .use(
     sass({
       outputStyle: 'compressed',
       includePaths: ['node_modules'],
@@ -32,21 +46,14 @@ Metalsmith(__dirname)
   )
   .use(
     permalinks({
-      pattern: ':title'
-    })
-  )
-  .use(
-    collections({
-      posts: {
-        sortBy: 'date',
-        reverse: true,
-        refer: false
-      },
-      articles: {
-        sortBy: 'date',
-        reverse: true,
-        refer: false
-      }
+      pattern: ':title',
+      linksets: [{
+        match: { collection: 'articles' },
+        pattern: 'articles/:date-:title/'
+      }, {
+        match: { collection: 'posts' },
+        pattern: 'posts/:date-:title/'
+      }]
     })
   )
   // .use(

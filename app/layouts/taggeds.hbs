@@ -1,0 +1,20 @@
+{{# extend "base"}}
+
+  {{# content "mainContainer" }}
+
+    <p>
+      {{#each this}}
+        {{@key}}: {{this}}
+      {{/each}}
+    </p>
+
+    <p>
+      {{#each tags.[tag]}}
+        <p>{{ title }}</p>
+        <p>{{ path }}</p>
+      {{/each}}
+    </p>
+
+  {{/content}}
+
+{{/extend}}

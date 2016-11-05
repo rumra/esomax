@@ -60,7 +60,7 @@ Metalsmith(__dirname)
   .use(
     tags({
       path: 'tags/:tag/index.html',
-      layout: 'tags.hbs',
+      layout: 'taggeds.hbs',
     })
   )
 

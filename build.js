@@ -7,6 +7,10 @@ var watch = require('metalsmith-watch');
 var sass = require('metalsmith-sass');
 var permalinks = require('metalsmith-permalinks');
 var collections = require('metalsmith-collections');
+var tags = require('metalsmith-tags');
+var excerpts = require('metalsmith-excerpts');
+
+
 
 var handlebarsLayouts = require('handlebars-layouts');
 
@@ -15,20 +19,59 @@ handlebarsLayouts.register(handlebars);
 
 Metalsmith(__dirname)
   .source('app/src')
+
+  // remove all collections that used
+  // issue https://github.com/segmentio/metalsmith-collections/issues/27
+  .use((files, metalsmith, done) => {
+    metalsmith._metadata.collections = null;
+    metalsmith._metadata.articles = null;
+    metalsmith._metadata.posts = null;
+    done();
+  })
+
   .use(
     collections({
       articles: {
         sortBy: 'date',
         reverse: true,
-        refer: false
       },
       posts: {
         sortBy: 'date',
         reverse: true,
-        refer: false
       }
     })
   )
+
+  .use(excerpts())
+
+  .use(
+    permalinks({
+      pattern: ':title',
+      linksets: [{
+        match: { collection: 'articles' },
+        pattern: ':collection/:date/:title/'
+      }, {
+        match: { collection: 'posts' },
+        pattern: ':collection/:date/:title/'
+      }]
+    })
+  )
+
+  .use(
+    tags({
+      path: 'tags/:tag/index.html',
+      layout: 'tags.hbs',
+    })
+  )
+
+  .use(
+    layouts({
+      engine: 'handlebars',
+      directory: 'app/layouts',
+      partials: 'app/partials'
+    })
+  )
+
   .use(
     sass({
       outputStyle: 'compressed',
@@ -37,39 +80,18 @@ Metalsmith(__dirname)
       sourceMapContents: true,
     })
   )
-  .use(
-    layouts({
-      engine: 'handlebars',
-      directory: 'app/layouts',
-      partials: 'app/partials'
-    })
-  )
-  .use(
-    permalinks({
-      pattern: ':title',
-      linksets: [{
-        match: { collection: 'articles' },
-        pattern: 'articles/:date-:title/'
-      }, {
-        match: { collection: 'posts' },
-        pattern: 'posts/:date-:title/'
-      }]
-    })
-  )
+
   // .use(
   //   assets({
   //     source: './app/assets',
   //     destination: './assets'
   //   })
   // )
-  .use(serve({
-    port: 8080,
-    verbose: true
-  }))
+
   .use(
     watch({
       paths: {
-        '${source}/**/*': true,
+        '${source}/**/*': '**/*',
         'app/layouts/**/*': '**/*',
         'app/partials/**/*': '**/*',
       },
@@ -77,12 +99,15 @@ Metalsmith(__dirname)
     })
   )
 
-/*     *******************    */
-/*     plugin chain to        */
-/*     manipulate files       */
-/*     *******************    */
+  .use(
+    serve({
+      port: 8080,
+      verbose: true
+    })
+  )
 
   .destination('docs')
+
   .build(function(err) {
     if (err) throw err;
     console.log('Build finished!');

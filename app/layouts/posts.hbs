@@ -2,10 +2,14 @@
 
   {{# content "mainContainer" }}
 
-    <p>collections.length: {{ collections.posts.length }}</p>
-
     {{#each collections.posts}}
-      <section>((( {{{ contents }}} )))</section>
+      <section>
+        <div>{{ title }}</div>
+        <div>{{{ contents }}}</div>
+        <div>
+          <a href="/{{ path }}">Read more...</a>
+        </div>
+      </section>
     {{/each}}
 
   {{/content}}

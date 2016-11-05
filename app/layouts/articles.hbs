@@ -3,10 +3,14 @@
   {{# content "mainContainer" }}
 
     {{#each collections.articles}}
-      <article>
-        <div>{{ this.path }}</div>
-        <div>{{{ contents }}}</div>
-      </article>
+      <p>{{ title }}</p>
+      <p>
+        <div>{{{ excerpt  }}}</div>
+        <div>
+          <span>PAth: "{{ path }}"</span>
+          <a href="/{{ path }}">Read more...</a>
+        </div>
+      </p>
     {{/each}}
 
   {{/content}}

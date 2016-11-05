@@ -2,14 +2,10 @@
 
   {{# content "mainContainer" }}
 
-    <p>
-      {{#each this}}
-        {{@key}}: {{this}}
-      {{/each}}
-    </p>
+    <h2>#{{ tag }}</h2>
 
     <p>
-      {{#each tags.[tag]}}
+      {{#each (lookup tags tag)}}
         <p>{{ title }}</p>
         <p>{{ path }}</p>
       {{/each}}

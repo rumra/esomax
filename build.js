@@ -18,6 +18,10 @@ var handlebarsLayouts = require('handlebars-layouts');
 
 handlebarsLayouts.register(handlebars);
 
+handlebars.registerHelper('eq', function (arg1, arg2) {
+  return arg1 === arg2;
+});
+
 
 var isProducitonBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'production');
 

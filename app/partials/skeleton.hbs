@@ -5,34 +5,39 @@
     <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
     <link href="/assets/styles.css" rel="stylesheet" type="text/css">
     <title>
-      {{# block "title"}}{{/block}}
+      {{# block "title"}}{{title}}{{/block}}
     </title>
   </head>
   <body>
-    <header>
-      <h3>
-        Rumra / Румра
-      </h3>
-      <p>
-        "Кто я?" "Откуда я пришел?" "Куда я иду?"
-      </p>
+    <header class="top-navigation">
+      <div class="logo">
+        <h3>
+          Румра
+        </h3>
+        <p>
+          "Кто я?" "Откуда я пришел?" "Куда я иду?"
+        </p>
+      </div>
+      <nav class="navigation">
+        <ul class="menu">
+          <li class="menu-item {{#if (eq title 'Rumra')}}menu-item-active{{/if}}" >
+            <a href="/">Блог</a>
+          </li>
+          <li class="menu-item {{#if (eq title 'Articles')}}menu-item-active{{/if}}" >
+            <a href="/articles/">Статьи</a>
+          </li>
+          <li class="menu-item {{#if (eq title 'Tags')}}menu-item-active{{/if}}" >
+            <a href="/tags/">Темы</a>
+          </li>
+          <li class="menu-item {{#if (eq title 'About')}}menu-item-active{{/if}}" >
+            <a href="/about">О сайте</a>
+          </li>
+          <li class="menu-item {{#if (eq title 'Attention')}}menu-item-active{{/if}}" >
+            <a href="/attention">Соберись!</a>
+          </li>
+        </ul>
+      </nav>
     </header>
-    <nav>
-      <ul class="list--inline">
-        <li>
-          <a href="/">Блог</a>
-        </li>
-        <li>
-          <a href="/articles">Статьи</a>
-        </li>
-        <li>
-          <a href="/tags/">Темы</a>
-        </li>
-        <li>
-          <a href="/about">О сайте</a>
-        </li>
-      </ul>
-    </nav>
     <section>
       {{# block "mainContainer"}}{{/block}}
     </section>

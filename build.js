@@ -106,7 +106,7 @@ Metalsmith(__dirname)
     })
   )
 
-  .destination('docs')
+  .destination('public')
 
   .build(function(err) {
     if (err) throw err;

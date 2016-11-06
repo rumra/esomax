@@ -9,6 +9,8 @@ var permalinks = require('metalsmith-permalinks');
 var collections = require('metalsmith-collections');
 var tags = require('metalsmith-tags');
 var excerpts = require('metalsmith-excerpts');
+var msIf = require('metalsmith-if');
+var prefix = require('metalsmith-prefix');
 
 
 
@@ -17,7 +19,13 @@ var handlebarsLayouts = require('handlebars-layouts');
 handlebarsLayouts.register(handlebars);
 
 
+var isProducitonBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'production');
+
+
 Metalsmith(__dirname)
+  .metadata({
+    isProductionBuild: isProducitonBuild
+  })
   .source('app/src')
 
   // remove all collections that used
@@ -81,6 +89,16 @@ Metalsmith(__dirname)
     })
   )
 
+  .use(
+    msIf(
+      isProducitonBuild,
+      prefix({
+        prefix: 'rastar',
+        selector: 'a, img, link, script'
+      })
+    )
+  )
+
   // .use(
   //   assets({
   //     source: './app/assets',
@@ -89,21 +107,27 @@ Metalsmith(__dirname)
   // )
 
   .use(
-    watch({
-      paths: {
-        '${source}/**/*': '**/*',
-        'app/layouts/**/*': '**/*',
-        'app/partials/**/*': '**/*',
-      },
-      livereload: true,
-    })
+    msIf(
+      !isProducitonBuild,
+      watch({
+        paths: {
+          '${source}/**/*': '**/*',
+          'app/layouts/**/*': '**/*',
+          'app/partials/**/*': '**/*',
+        },
+        livereload: true,
+      })
+    )
   )
 
   .use(
-    serve({
-      port: 8080,
-      verbose: true
-    })
+    msIf(
+      !isProducitonBuild,
+      serve({
+        port: 8080,
+        verbose: true
+      })
+    )
   )
 
   .destination('public')

@@ -3,14 +3,18 @@
 2) ``` npm install -g yarn ```
 3) ```yarn install ```
 
-## Build and watch the site
-1) ``` node build.js ```
+## Run commands
+1) For development ``` node build.js ```
+2) For poduction push
+   ```
+   NODE_ENV=production node build.js
+   node ghpagespuyblish.js
+   ```
+
 
 ## May be usefull metalsmith plugins:
 1) [metalsmith-in-place](https://github.com/superwolff/metalsmith-in-place)
 2) [metalsmith-word-count](https://github.com/majodev/metalsmith-word-count)
-
-
 
 ### Notes:
 1) Metalsmith build. Using plugin order counts! (Use right order, collecitons, layouts.)

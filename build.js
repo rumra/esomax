@@ -64,7 +64,7 @@ Metalsmith(__dirname)
         pattern: ':collection/:date/:title/'
       }, {
         match: { collection: 'posts' },
-        pattern: ':collection/:date/:title/'
+        pattern: ':collection/:date/:inUrlName/'
       }]
     })
   )

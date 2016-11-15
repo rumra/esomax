@@ -1,0 +1,16 @@
+.posts {
+  background-color: #eee;
+  padding: 1em 2em;
+
+  .post-preview {
+    background-color: white;
+    border: 1px solid gray;
+    padding: 1em 2em;
+    margin-top: 1em;
+
+    .post-picture {
+      max-width: 5em;
+    }
+  }
+
+}

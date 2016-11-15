@@ -2,15 +2,17 @@
 
   {{# content "mainContainer" }}
 
-    {{#each collections.posts}}
-      <section>
-        <div>{{ title }}</div>
-        <div>{{{ contents }}}</div>
-        <div>
-          <a href="/{{ path }}">Read more...</a>
-        </div>
-      </section>
-    {{/each}}
+    <section class="posts">
+      {{#each collections.posts}}
+        <article class="post-preview">
+          <h6>{{ title }}</h6>
+          <div>{{{ excerpt }}}</div>
+          <div>
+            <a href="/{{ path }}">Read more...</a>
+          </div>
+        </article>
+      {{/each}}
+    </section>
 
   {{/content}}
 

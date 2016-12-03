@@ -11,6 +11,7 @@ var tags = require('metalsmith-tags');
 var excerpts = require('metalsmith-excerpts');
 var msIf = require('metalsmith-if');
 var prefix = require('metalsmith-prefix');
+var inPlace = require('metalsmith-in-place');
 
 
 
@@ -38,6 +39,7 @@ Metalsmith(__dirname)
     metalsmith._metadata.collections = null;
     metalsmith._metadata.articles = null;
     metalsmith._metadata.posts = null;
+    metalsmith._metadata.elements = null;
     done();
   })
 
@@ -50,9 +52,18 @@ Metalsmith(__dirname)
       posts: {
         sortBy: 'date',
         reverse: true,
+      },
+      elements: {
+        sortBy: 'eindex',
+        reverse: false,
       }
     })
   )
+
+  .use(inPlace({
+    engine: 'handlebars',
+    pattern: '**/*.html'
+  }))
 
   .use(excerpts())
 
@@ -80,7 +91,10 @@ Metalsmith(__dirname)
     layouts({
       engine: 'handlebars',
       directory: 'app/layouts',
-      partials: 'app/partials'
+      partials: {
+        base: '../partials/base',
+        skeleton: '../partials/skeleton'
+      }
     })
   )
 

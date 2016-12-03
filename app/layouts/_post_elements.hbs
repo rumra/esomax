@@ -1,0 +1,27 @@
+{{# extend "base"}}
+
+  {{# content "mainContainer" }}
+
+    <section class="elements">
+      {{{ this.contents }}}
+      <hr>
+      {{#each collections.elements}}
+        <article>
+          <h3>{{elementName}}</h3>
+          <img class="post-picture" alt="{{elementName}}" src="{{imageUrl}}">
+          <div>Цвет: {{ color }}</div>
+          <div>Магическое оружие: {{ magicWeapon }}</div>
+          <div>Главные качества: {{ attributes }}</div>
+          <div>Родственные понятия: {{ relative }}</div>
+
+          <div>
+            {{{ this.contents }}}
+          </div>
+        </article>
+        <hr>
+      {{/each}}
+    </section>
+
+  {{/content}}
+
+{{/extend}}

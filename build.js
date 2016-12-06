@@ -24,12 +24,12 @@ handlebars.registerHelper('eq', function (arg1, arg2) {
 });
 
 
-var isProducitonBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'production');
+var isProductionBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'production');
 
 
 Metalsmith(__dirname)
   .metadata({
-    isProductionBuild: isProducitonBuild
+    isProductionBuild: isProductionBuild
   })
   .source('app/src')
 
@@ -109,7 +109,7 @@ Metalsmith(__dirname)
 
   .use(
     msIf(
-      isProducitonBuild,
+      isProductionBuild,
       prefix({
         prefix: 'rastar',
         selector: 'a, img, link, script'
@@ -126,7 +126,7 @@ Metalsmith(__dirname)
 
   .use(
     msIf(
-      !isProducitonBuild,
+      !isProductionBuild,
       watch({
         paths: {
           '${source}/**/*': '**/*',
@@ -140,7 +140,7 @@ Metalsmith(__dirname)
 
   .use(
     msIf(
-      !isProducitonBuild,
+      !isProductionBuild,
       serve({
         port: 8080,
         verbose: true

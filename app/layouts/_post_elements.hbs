@@ -9,10 +9,13 @@
         <article>
           <h3>{{elementName}}</h3>
           <img class="post-picture" alt="{{elementName}}" src="{{imageUrl}}">
-          <div>Цвет: {{ color }}</div>
-          <div>Магическое оружие: {{ magicWeapon }}</div>
-          <div>Главные качества: {{ attributes }}</div>
-          <div>Родственные понятия: {{ relative }}</div>
+          <div><strong>Символ:</strong> {{ symbol }}</div>
+          <div><strong>Цвет:</strong> {{ color }}</div>
+          <div><strong>Магическое оружие:</strong> {{ magicWeapon }}</div>
+          <div><strong>Ключевые слова:</strong> {{ keywords }}</div>
+          <div><strong>Добродетель:</strong> {{ virtue }}</div>
+          <div><strong>Темперамент:</strong> {{ temperament }}</div>
+          <div><strong>Свойства:</strong> {{ properties }}</div>
 
           <div>
             {{{ this.contents }}}
